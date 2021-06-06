@@ -72,5 +72,9 @@ class Database:
         sql = "UPDATE Users SET last_ozon_upd = $1 WHERE id = $2"
         return await self.pool.execute(sql, datetime.datetime.now(), id)
 
+    async def update_wb_last_upd(self, id):
+        sql = "UPDATE Users SET last_wb_upd = $1 WHERE id = $2"
+        return await self.pool.execute(sql, datetime.datetime.now(), id)
+
 
 db = Database(loop=asyncio.get_event_loop())

@@ -29,7 +29,6 @@ async def scheduled(wait_for):
             try:
                 # make API request here
                 if user[2] and user[6]:
-                    print(user)
                     # if Ozon API key and client id exists
                     result = await do_ozon_api_request(user[2], user[6], user[4])
                     print(result)
@@ -45,13 +44,16 @@ async def scheduled(wait_for):
                 if user[3]:
                     # if wb API key exists
                     result = await make_wild_request(user[3], user[5])
-                    await bot.send_message(user[0], result)
                     print(result)
+                    orders = result['orders']
+                    for order in orders:
+                        await bot.send_message(user[0], 'У вас новый заказ на Wildberries')
+                    await db.update_wb_last_upd(user[0])
             except ChatNotFound:
                 # deleting user from DB if chat not found, made for optimization
                 await db.delete_user(user[0])
 
 
 if __name__ == '__main__':
-    dp.loop.create_task(scheduled(10))
+    dp.loop.create_task(scheduled(1500))
     executor.start_polling(dp, on_startup=on_startup)
