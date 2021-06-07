@@ -1,0 +1,5 @@
+BOT_TOKEN = "1804058947:AAEXulJ5vQZFEO-F87vu4jrPOFpcZ6ZgOcM"
+ADMINS = ['334541675', ]
+IP = "localhost"
+PGUSER = 'postgres'
+PGPASSWORD = 'toor'
